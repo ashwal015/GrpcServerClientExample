@@ -1,4 +1,4 @@
-# gRPC Greeter Demo (.NET)
+# gRPC Greeter Demo (.NET 10)
 
 A simple gRPC example with a **server** and a **client** in one repository.
 
@@ -8,17 +8,20 @@ The client sends a name to the server, and the server replies with a greeting.
 
 ```
 .
-├── GrpcServer/      # gRPC server (ASP.NET Core)
-├── GrpcClient/      # gRPC client (console app)
+├── GrpcService/          # gRPC server (ASP.NET Core)
+│   ├── Protos/greet.proto
+│   ├── Services/GreeterService.cs
+│   └── Program.cs
+├── GrpcClientServices/   # gRPC client (console app)
+│   ├── Protos/greet.proto
+│   └── Program.cs
 ├── .gitignore
 └── README.md
 ```
 
-> Rename the folders above if yours are called something different.
-
 ## Requirements
 
-- [.NET SDK](https://dotnet.microsoft.com/download) (8.0 or newer)
+- [.NET 10 SDK](https://dotnet.microsoft.com/download)
 - A trusted dev certificate (one-time setup):
 
 ```bash
@@ -30,7 +33,7 @@ dotnet dev-certs https --trust
 ### 1. Start the server
 
 ```bash
-cd GrpcServer
+cd GrpcService
 dotnet run --launch-profile https
 ```
 
@@ -44,7 +47,7 @@ The server listens on:
 Open a second terminal:
 
 ```bash
-cd GrpcClient
+cd GrpcClientServices
 dotnet run
 ```
 
@@ -62,7 +65,7 @@ The client connects to the server with:
 using var channel = GrpcChannel.ForAddress("https://localhost:7040");
 ```
 
-If you change the server port in `GrpcServer/Properties/launchSettings.json`, update the address in the client as well.
+If you change the server port in `GrpcService/Properties/launchSettings.json`, update the address in the client as well.
 
 ## Troubleshooting
 
@@ -75,6 +78,6 @@ If you change the server port in `GrpcServer/Properties/launchSettings.json`, up
 
 ## Tech stack
 
-- C# / .NET
+- C# / .NET 10
 - gRPC (Grpc.AspNetCore, Grpc.Net.Client)
 - Protocol Buffers
